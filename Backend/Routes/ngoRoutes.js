@@ -1,5 +1,6 @@
 import express from "express";
-
+import ngoModel from "../Model/ngo.js";
+import { getNgoById } from "../DbHandler/ngoHandler.js";
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -39,10 +40,10 @@ router.post("/login", async (req, res) => {
     const { id, pwd } = req.body;
 
     const user = await getNgoById(id);
-
-    if (user != 0 || user.pwd !== pwd) {
+    console.log(typeof(pwd));
+    if (user == 0 || user.pwd != pwd) {
       return res.status(401).json({
-        message: "Invalid credentials",
+        msg: "Invalid credentials",
       });
     }
 
