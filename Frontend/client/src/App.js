@@ -1,11 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-import Loginngo from './components/NGO/Loginngo';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
 
 function App() {
   return (
     <div>
-      <Loginngo></Loginngo>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home></Home>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
