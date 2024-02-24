@@ -9,8 +9,8 @@ export default function Loginngo() {
     try {
       const response = await axios
         .post("http://localhost:3003/ngo/login", {
-          id: id,
-          password: password,
+          id: parseInt(id),
+          pwd: password,
         })
         .then((res) => {
           if (res.data.msg === "Login successful") {
