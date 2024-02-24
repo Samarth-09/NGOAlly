@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
 import axios from "axios";
-export default function Loginngo() {
+export default function Loginngo(props) {
+
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmit = async (event) => {
@@ -15,6 +16,7 @@ export default function Loginngo() {
         .then((res) => {
           if (res.data.msg === "Login successful") {
             alert("NGO logined successfully");
+            props.onSubmit(id);
           }
         })
         .catch((e) => {
