@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 const ngoSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   location: {
     type: String,
-    require: true,
+    required: true,
   },
   id: {
     unique: true,
-    require: true,
+    required: true,
     type: Number,
   },
   email: String,
