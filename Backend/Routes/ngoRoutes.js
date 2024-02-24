@@ -97,8 +97,6 @@ router.post("/login", async (req, res) => {
     const { id, pwd } = req.body;
 
     const user = await getNgoById(id);
-    console.log(typeof(pwd));
-    console.log(user.pwd);
     if (user == 0 || user.pwd != pwd) {
       return res.status(401).json({
         msg: "Invalid credentials",
