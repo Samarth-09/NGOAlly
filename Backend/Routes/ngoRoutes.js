@@ -1,6 +1,7 @@
 import express from "express";
 import ngoModel from "../Model/ngo.js";
 import { getNgoById } from "../DbHandler/ngoHandler.js";
+
 const router = express.Router();
 
 router.post("/register", async (req, res) => {

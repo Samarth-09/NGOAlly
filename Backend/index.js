@@ -3,6 +3,8 @@ import * as env from "dotenv";
 import mongoose from "mongoose";
 import ngoRouter from "./Routes/ngoRoutes.js";
 import campaignRouter from "./Routes/campaignRoutes.js";
+import ngoVolunteer from './Routes/volunteerRoutes.js';
+
 env.config();
 const app = express(); //*wifi#21
 app.use(express.json());
@@ -32,7 +34,7 @@ try {
 }
 
 app.use("/ngo", ngoRouter);
-
+app.use("/volunteer", ngoVolunteer);
 app.use("/campaign", campaignRouter);
 const port = process.env.PORT || 3003;
 
