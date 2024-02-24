@@ -1,7 +1,7 @@
 import express from "express";
 import ngoModel from "../Model/ngo.js";
 import { getNgoById } from "../DbHandler/ngoHandler.js";
-import { getCapaignsById } from "../DbHandler/campaignHandler.js";
+import { getCampaignsById } from "../DbHandler/campaignHandler.js";
 const router = express.Router();
 
 router.get("/dashboard", async (req, res) => {
@@ -10,7 +10,7 @@ router.get("/dashboard", async (req, res) => {
     if (result == 0) {
       res.json({ msg: "Some Error" });
     } else {
-      var r = await getCapaignsById(result.currentCampaigns);
+      var r = await getCampaignsById(result.currentCampaigns);
       if (r == 0) {
         res.json({ msg: "Some Error" });
       } else {
@@ -23,7 +23,7 @@ router.get("/dashboard", async (req, res) => {
           };
           x.push(d);
         });
-        var r = await getCapaignsById(result.previousCampaigns);
+        var r = await getCampaignsById(result.previousCampaigns);
         if (r == 0) {
           res.json({ msg: "Some Error" });
         } else {
