@@ -8,7 +8,7 @@ import VolDashboard from "./components/VOLUNTEER/VolDashboard";
 import Createcampaign from "./components/NGO/Createcampaign";
 import Home from "./components/Home";
 
-let ID = "";
+export let ID = "";
 
 function App() {
 
