@@ -2,6 +2,7 @@ import express from "express";
 import ngoModel from "../Model/ngo.js";
 import { getNgoById } from "../DbHandler/ngoHandler.js";
 import { getCampaignsById } from "../DbHandler/campaignHandler.js";
+import { saveNgo } from "../DbHandler/ngoHandler.js";
 const router = express.Router();
 
 router.get("/dashboard", async (req, res) => {
