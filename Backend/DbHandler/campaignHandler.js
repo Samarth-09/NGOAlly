@@ -12,4 +12,16 @@ const saveCampaign = async (d) => {
   }
 };
 
-export { saveCampaign };
+const getCapaignsById = async (ids) => {
+  try {
+    const result = await campaignModel.find({ id: { $in: ids } });
+    if (result.length == 0) {
+      return 0;
+    }
+    return result;
+  } catch (e) {
+    console.log(e);
+    return 0;
+  }
+};
+export { getCapaignsById, saveCampaign };

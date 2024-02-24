@@ -1,8 +1,63 @@
 import express from "express";
 import ngoModel from "../Model/ngo.js";
 import { getNgoById } from "../DbHandler/ngoHandler.js";
-
+import { getCapaignsById } from "../DbHandler/campaignHandler.js";
 const router = express.Router();
+
+router.get("/dashboard", async (req, res) => {
+  try {
+    const result = await getNgoById(req.query.id);
+    if (result == 0) {
+      res.json({ msg: "Some Error" });
+    } else {
+      var r = await getCapaignsById(result.currentCampaigns);
+      if (r == 0) {
+        res.json({ msg: "Some Error" });
+      } else {
+        var x = [];
+        r.forEach((e) => {
+          var d = {
+            name: e.name,
+            description: e.description,
+            status: "Ongoing",
+          };
+          x.push(d);
+        });
+        var r = await getCapaignsById(result.previousCampaigns);
+        if (r == 0) {
+          res.json({ msg: "Some Error" });
+        } else {
+          r.forEach((e) => {
+            var d = {
+              name: e.name,
+              description: e.description,
+              status: "Completed",
+            };
+            x.push(d);
+          });
+          const y = {
+            name: result.name,
+            description: result.description,
+          };
+          // var data = {
+          //   data1: y,
+          //   data2: x,
+          // };
+          res.json({
+            data1: y,
+            data2: x,
+          });
+        }
+      }
+    }
+  } catch (e) {
+    res.json({ msg: "Some Error" });
+    console.log(e);
+  }
+});
+
+
+
 
 router.post("/register", async (req, res) => {
   try {

@@ -1,9 +1,5 @@
 import express from "express";
-import { getVolunteerById } from "../DbHandler/volunteerHandler.js";
-import {
-  getCapaignsById,
-  getCampaignsByFilters,
-} from "../DbHandler/campaignHandler.js";
+
 
 import volunteerModel from "../Model/Volunteer.js";
 
