@@ -22,15 +22,16 @@ export default function Signupvol() {
     try {
       let locationFilter = location.concat(",", filter);
       const spli = locationFilter.split(",");
+      console.log(spli);
       const response = await axios
-        .post("http://localhost:3003/ngo/register", {
+        .post("http://localhost:3003/volunteer/register", {
           name: name,
           email: email,
           age: age,
           gender: selectedGender,
           id: id,
-          password: password,
-          locationfilter: spli,
+          pwd: password,
+          filters: spli,
         })
         .then((res) => {
           if (res.data.msg === "Volunteer registered successfully") {

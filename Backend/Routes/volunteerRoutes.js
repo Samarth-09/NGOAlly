@@ -6,9 +6,10 @@ const router = express.Router();
 
 router.post("/login", async (req, res) => {
   try {
-    const { name, pwd } = req.body;
+    const { id, pwd } = req.body;
 
-    const volunteer = await volunteerModel.findOne({ name, pwd });
+    const volunteer = await volunteerModel.findOne({ id, pwd });
+    console.log(volunteer);
 
     if (volunteer) {
       return res.status(200).json({
@@ -27,7 +28,6 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const { name, age, gender, pwd, email, id, filters } = req.body;
-
     const newVolunteer = new volunteerModel({
       name,
       age,
