@@ -3,7 +3,7 @@ import Signupngo from "./NGO/Signupngo";
 import Loginngo from "./NGO/Loginngo";
 import Signupvol from "./VOLUNTEER/Signupvol";
 import Loginvol from "./VOLUNTEER/Loginvol";
-export default function Home() {
+export default function Home(props) {
   const [signUp, setSignUp] = useState("NGO");
   const [logIn, setLogIn] = useState("NGO");
 
@@ -178,7 +178,7 @@ export default function Home() {
 
               <div className="row">
                 <div className="col-12">
-                  {logIn === "NGO" ? <Loginngo /> : <Loginvol />}
+                  {logIn === "NGO" ? <Loginngo onSubmit={props.onSubmit}/> : <Loginvol />}
                 </div>
               </div>
             </div>
