@@ -1,0 +1,36 @@
+body {
+  background-color: black;
+  font-family: "Poppins", sans-serif; /* poppins-regular*/
+  font-weight: 400;
+  font-style: normal;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.bg-ngo-container {
+  background: linear-gradient(45deg, #a8c2ed, #d7f9f8);
+}
+
+.btn-createcampaign-form {
+  border: none;
+  color: white;
+}
+.bg-color-createcampaign {
+  background: linear-gradient(160deg, #50ce9f, #bcd1d6);
+}
+
+.createcampaign-placeholder::placeholder {
+  color: #888;
+  font-weight: lighter;
+}
+
+.font-family-label{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:larger;
+  font-weight: 400;
+}
