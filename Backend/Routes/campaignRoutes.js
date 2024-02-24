@@ -17,6 +17,14 @@ router.post("/create", async (req, res) => {
   if (x == 0) {
     res.json({ msg: "Some error" });
   } else {
+    console.log(req.body.campaignDate);
+    console.log(req.body.id);
+
+    var dates1 = req.body.campaignDate.split("-");
+
+    var stDate = convertToDate(dates1[0]),
+      enDate = convertToDate(dates1[1]);
+    scheduleCampaignEndTask(enDate, req.body.id);
     res.json({ msg: "done" });
   }
 });
@@ -31,20 +39,25 @@ router.get("/details", async (req, res) => {
       if (vol == 0) {
         res.json({ msg: "some error" });
       } else {
-        res.json({
-          name: result[0].name,
-          location: result[0].location,
-          ProjectNeeds: result[0].ProjectNeeds,
-          host: result[0].host,
-          applicationDate: result[0].applicationDate,
-          campaignDate: result[0].campaignDate,
-          canApply: canApply,
-          campaignEnded: campaignEnded,
-          status:
-            vol.requestStatus[
-              vol.currentCampaigns.indexOf(req.query.campaignId)
-            ],
-        });
+        const ngo = await getNgoById(result[0].host);
+        if (ngo == 0) {
+          res.json({ msg: "some error" });
+        } else {
+          res.json({
+            name: result[0].name,
+            location: result[0].location,
+            ProjectNeeds: result[0].ProjectNeeds,
+            host: ngo.name,
+            applicationDate: result[0].applicationDate,
+            campaignDate: result[0].campaignDate,
+            canApply: canApply,
+            campaignEnded: campaignEnded,
+            status:
+              vol.requestStatus[
+                vol.currentCampaigns.indexOf(req.query.campaignId)
+              ],
+          });
+        }
       }
     }
   } else {
@@ -75,5 +88,16 @@ router.get("/details", async (req, res) => {
     }
   }
 });
+
+
+
+function convertToDate(dateString) {
+  const [day, month, year] = dateString.split("/");
+  const date = new Date(year, month - 1, day);
+  return date;
+}
+
+
+
 
 export default router;
