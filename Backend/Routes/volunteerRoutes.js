@@ -1,6 +1,5 @@
 import express from "express";
 
-
 import volunteerModel from "../Model/Volunteer.js";
 
 const router = express.Router();
@@ -27,13 +26,13 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
-    const { name, age, gender, pwd, email, id, filters } = req.body;
-
+   const  { name, age, gender, pwd, email, id, filters } = req.body;
+   console.log(filters);
     const newVolunteer = new volunteerModel({
       name,
       age,
       gender,
-      pwd,
+      pwd,  
       email,
       id,
       filters,
