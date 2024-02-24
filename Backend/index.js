@@ -1,6 +1,8 @@
 import express from 'express';
 import * as env from 'dotenv';
-import ngoRouter from '../Routes/ngoRoutes.js';
+import mongoose from 'mongoose';
+import ngoRouter from './Routes/ngoRoutes.js';
+import ngoVolunteer from './Routes/volunteerRoutes.js';
 env.config();
 const app = express();  //*wifi#21
 app.use(express.json());
@@ -30,6 +32,7 @@ app.use((req, res, next) => {
   }
 
   app.use("/ngo", ngoRouter);
+  app.use("/volunteer", ngoVolunteer);
   const port = process.env.PORT || 3003;
 
   app.listen(port, ()=>{

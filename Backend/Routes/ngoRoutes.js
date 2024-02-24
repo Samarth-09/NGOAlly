@@ -1,5 +1,5 @@
 import express from "express";
-
+import ngoModel from "../Model/ngo.js";
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
