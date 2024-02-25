@@ -86,6 +86,7 @@ router.get("/details", async (req, res) => {
         var v = vol.map((e) => {
           return {
             name: e.name,
+            id: e.id,
             status:
               e.requestStatus[e.currentCampaigns.indexOf(req.query.campaignId)],
           };
