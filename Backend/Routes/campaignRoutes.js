@@ -1,4 +1,5 @@
 import express from "express";
+import { getNgoById } from "../DbHandler/ngoHandler.js";
 import {
   saveCampaign,
   getCampaignsById,
