@@ -112,4 +112,7 @@ router.get("/dashboard", async (req, res) => {
   }
 });
 
+router.get("/apply", async (req, res) => {
+    
+});
 export default router;

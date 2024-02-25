@@ -91,15 +91,11 @@ router.get("/details", async (req, res) => {
   }
 });
 
-
-
 function convertToDate(dateString) {
   const [day, month, year] = dateString.split("/");
   const date = new Date(year, month - 1, day);
   return date;
 }
 
-
-
-
 export default router;
+export { canApply, campaignEnded };
