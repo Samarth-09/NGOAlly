@@ -120,8 +120,6 @@ router.get("/dashboard", async (req, res) => {
   }
 });
 
-
-    
 router.get("/apply", async (req, res) => {
   if (canApply && !campaignEnded) {
     let r = await addCampaign(req.query.volunteerId, req.query.campaignId);
