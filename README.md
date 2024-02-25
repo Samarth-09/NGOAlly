@@ -2,7 +2,7 @@
 
 ## Overview
 
-NGOAlly is a dynamic platform designed to bridge the gap between Non-Governmental Organizations (NGOs) and volunteers. It empowers NGOs to create and share campaigns, allowing volunteers to discover and apply for initiatives that resonate with their interests and skills. This document provides an overview of the project, its workflow for volunteers and NGOs, the technology stack used, and information about the development team.
+NGOAlly is a dynamic platform designed to bridge the gap between Non-Governmental Organizations (NGOs) and volunteers. It empowers NGOs to create and share campaigns, allowing volunteers to discover and apply for initiatives that resonate with their interests and skills. Our platform provides a wide range of volunteer opportunities across various causes, including healthcare, environmental conservation, social services, technology and many more. This document provides an overview of the project, its workflow for volunteers and NGOs, the technology stack used, and information about the development team.
 
 ## Workflow
 
