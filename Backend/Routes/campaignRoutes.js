@@ -49,7 +49,7 @@ router.get("/details", async (req, res) => {
     if (result == 0) {
       res.json({ msg: "some error" });
     } else {
-      var vol = await getVolunteerById(req.query.volunteerId);
+      var vol = await getVolunteerById(parseInt(req.query.volunteerId));
       if (vol == 0) {
         res.json({ msg: "some error" });
       } else {
@@ -67,9 +67,9 @@ router.get("/details", async (req, res) => {
             canApply: canApply,
             campaignEnded: campaignEnded,
             status:
-              vol.currentCampaigns.indexOf(req.query.campaignId) != -1
+              vol.currentCampaigns.indexOf(parseInt(req.query.campaignId)) != -1
                 ? vol.requestStatus[
-                    vol.currentCampaigns.indexOf(req.query.campaignId)
+                    vol.currentCampaigns.indexOf(parseInt(req.query.campaignId))
                   ]
                 : "not applied",
           });
