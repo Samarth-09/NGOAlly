@@ -8,8 +8,9 @@ import {
 import {
   addVolunteer,
   getCampaignsById,
+  getCampaignsByFilters
 } from "../DbHandler/campaignHandler.js";
-import { canApply, campaignEnded } from "./campaignRoutes.js";
+import { canApply, campaignEnded } from "./Movecampaign.js";
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
@@ -77,6 +78,7 @@ router.get("/dashboard", async (req, res) => {
           var idx = result.currentCampaigns.indexOf(e.id);
           var d = {
             name: e.name,
+            campaignId: e.id,
             description: e.description,
             status: "Ongoing",
             result: result.requestStatus[idx], //"GRANTED""PENDING" "REJECTED"
@@ -120,6 +122,47 @@ router.get("/dashboard", async (req, res) => {
   }
 });
 
+router.get("/campaignFeed", async (req, res) => {
+  const result = await getVolunteerById(req.query.id);
+  if (result == 0) {
+    res.json({ msg: "Some Error" });
+  } else {
+    const campaignList = await getCampaignsByFilters(result.filters);
+    if (campaignList == 0) {
+      res.json({ msg: "some error" });
+    }
+    else {
+      var data = [];
+      campaignList.forEach((e) => {
+        var idx = result.currentCampaigns.indexOf(e.id);
+        var status;
+        if (idx != -1) {
+          status = result.requestStatus[idx];
+        }
+        else {
+          status = "not applied";
+        }
+        var x = {
+          name: e.name,
+          description: e.description,
+          status: status
+        }
+        data.push(x);
+      });
+      if (campaignList == 0) {
+        res.json({ msg: "Some Error" });
+      } else {
+        res.json(data);
+      }
+    }
+
+  }
+});
+
+//name desc 
+
+
+
 router.get("/apply", async (req, res) => {
   if (canApply && !campaignEnded) {
     let r = await addCampaign(req.query.volunteerId, req.query.campaignId);
@@ -137,3 +180,23 @@ router.get("/apply", async (req, res) => {
 });
 
 export default router;
+
+// var idx1 = vol.currentCampaigns.indexOf(e.id), idx2 = vol.previousCampaigns.indexOf(e.id);
+// var status;
+// if (idx1 == -1) {
+//   if (idx2 == -1) {
+//     status = "not applied";
+//   }
+//   else {
+//     status = vol.requestStatus[idx2];
+//   }
+// }
+// else {
+//   status = vol.requestStatus[idx1];
+// }
+// var x = {
+//   e,
+//   status: status
+// }
+// data.push(x);
+// console.log(status);

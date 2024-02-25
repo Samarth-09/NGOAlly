@@ -21,7 +21,7 @@ router.get("/dashboard", async (req, res) => {
             name: e.name,
             description: e.description,
             status: "Ongoing",
-            id: e.id
+            id: e.id,
           };
           x.push(d);
         });
@@ -32,9 +32,9 @@ router.get("/dashboard", async (req, res) => {
           r.forEach((e) => {
             var d = {
               name: e.name,
+              campaignId: e.id,
               description: e.description,
               status: "Completed",
-              id: e.id
             };
             x.push(d);
           });
@@ -58,9 +58,6 @@ router.get("/dashboard", async (req, res) => {
     console.log(e);
   }
 });
-
-
-
 
 router.post("/register", async (req, res) => {
   try {
@@ -100,7 +97,7 @@ router.post("/login", async (req, res) => {
     const id1 = parseInt(id);
 
     const user = await getNgoById(id1);
- 
+
     // console.log(id1);
     // console.log(user);
     if (user == 0 || user.pwd != pwd) {
