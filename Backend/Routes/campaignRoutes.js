@@ -23,12 +23,12 @@ router.post("/create", async (req, res) => {
     console.log(req.body.campaignDate);
     console.log(req.body.id);
 
-     matchCampaignWithVolunteers(req.body);
+    matchCampaignWithVolunteers(req.body);
     var dates1 = req.body.campaignDate.split("-");
 
     var stDate = convertToDate(dates1[0]),
       enDate = convertToDate(dates1[1]);
-     scheduleCampaignEndTask(enDate, req.body.id);
+    scheduleCampaignEndTask(enDate, req.body.id);
     res.json({ msg: "done" });
   }
 });
@@ -57,9 +57,11 @@ router.get("/details", async (req, res) => {
             canApply: canApply,
             campaignEnded: campaignEnded,
             status:
-              vol.requestStatus[
-                vol.currentCampaigns.indexOf(req.query.campaignId)
-              ],
+              vol.currentCampaigns.indexOf(req.query.campaignId) != -1
+                ? vol.requestStatus[
+                    vol.currentCampaigns.indexOf(req.query.campaignId)
+                  ]
+                : "not applied",
           });
         }
       }
@@ -94,7 +96,10 @@ router.get("/details", async (req, res) => {
 });
 
 router.post("/grant", async (req, res) => {
-  const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId);
+  const result = await updateRequestStatus(
+    req.query.volunteerId,
+    req.query.campaignId
+  );
   if (result == 0) {
     res.json({ msg: "some error" });
   } else {

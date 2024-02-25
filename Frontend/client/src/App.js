@@ -8,6 +8,7 @@ import VolDashboard from "./components/VOLUNTEER/VolDashboard";
 import Createcampaign from "./components/NGO/Createcampaign";
 import Home from "./components/Home";
 import Campaignfeed from "./components/VOLUNTEER/Campaignfeed";
+import Viewmore from "./components/VOLUNTEER/Viewmore";
 
 function App() {
 
@@ -50,6 +51,9 @@ function App() {
           } />
           <Route path="/feed" element={
             <Campaignfeed></Campaignfeed>
+          } />
+          <Route path="/campaign-details" element={
+            <Viewmore></Viewmore>
           } />
         </Routes>
       </BrowserRouter>
