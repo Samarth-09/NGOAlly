@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ngoimg from "../assets/ngo.jpg";
-import { ID } from "../../App";
 
-const NgoDashboard = (props) => {
+const NgoDashboard = () => {
+
+  const userID = localStorage.getItem('userID');
   const [ngo, setNgo] = useState(null);
   const [campaign, setCampaign] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // let ID = props.prop;
-        console.log(ID);
         const response = await axios.get(
-          `http://localhost:3003/ngo/dashboard?id=${ID}`
+          `http://localhost:3003/ngo/dashboard?id=${userID}`
         );
 
         const data1 = response.data.data1;

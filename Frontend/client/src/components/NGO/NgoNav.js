@@ -4,6 +4,15 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../assets/Logo.png";
 export default function NgoNav() {
+  // let Dashval;
+  // useEffect(() => {
+  //   // const { ID, getId } = useContext(IdContext);
+  //   Dashval = ID1;
+  //   // getId(ID);
+  //   // console.log("Component mounted");
+  // }, []); 
+
+  // let DashUrl = `/ngo-dashboard?id=${Dashval}`
   return (
     <div>
       <Navbar expand="lg" data-bs-theme="dark" className="main-nav">

@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-export default function Loginngo(props) {
+export default function Loginngo() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
@@ -16,7 +16,7 @@ export default function Loginngo(props) {
         .then((res) => {
           if (res.data.msg === "Login successful") {
             alert("NGO logined successfully");
-            props.onSubmit(id);
+            localStorage.setItem('userID', id);
             setLoggedIn(true);
           }
         })
