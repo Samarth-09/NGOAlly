@@ -5,6 +5,7 @@ import Footer from "../Footer";
 
 const Viewdetails = () => {
   const campaign_id = localStorage.getItem("ngo-campaign-id");
+  console.log(campaign_id);
   const [campaign, setCampaign] = useState({});
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -22,7 +23,7 @@ const Viewdetails = () => {
         // console.log(3);
         //campaign_id = (campaign_id === null || campaign_id === 0 )? 2 : campaign_id;
         const response = await axios.get(
-          `http://localhost:3003/campaign/details?campaignId=2`
+          `http://localhost:3003/campaign/details?campaignId=${campaign_id}`
         );
         // console.log(4);
         const data1 = response.data.name;
@@ -84,12 +85,13 @@ const Viewdetails = () => {
             <u>
               <p style={{ marginBottom: "1%" }}>Volunteers list : </p>
             </u>
-            <div className="row">
+            {
+              (volunteers) ? (<div className="row">
               <div className="col-12">
                 {volunteers.map((obj, key) => (
                   <div id={key}>
                     <p style={{ marginBottom: "-1%" }}>
-                      <b>{key + 1}) Volunteer Name : </b>
+                      <b>{key + 1} Volunteer Name : </b>
                       {obj.name}
                     </p>
                     <p>
@@ -99,7 +101,9 @@ const Viewdetails = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div>) : (<p>Loading...</p>)
+            }
+            
           </div>
         </div>
       </div>

@@ -47,15 +47,15 @@ router.get("/details", async (req, res) => {
   const result = await getCampaignsById(req.query.campaignId);
   if (req.query.volunteerId != null) {
     if (result == 0) {
-      res.json({ msg: "some error" });
+      res.json({ msg: "some error1" });
     } else {
       var vol = await getVolunteerById(parseInt(req.query.volunteerId));
       if (vol == 0) {
-        res.json({ msg: "some error" });
+        res.json({ msg: "some error2" });
       } else {
         const ngo = await getNgoById(result[0].host);
         if (ngo == 0) {
-          res.json({ msg: "some error" });
+          res.json({ msg: "some error3" });
         } else {
           res.json({
             name: result[0].name,
@@ -79,11 +79,11 @@ router.get("/details", async (req, res) => {
   } else {
     // console.log(2);
     if (result == 0) {
-      res.json({ msg: "some error" });
+      res.json({ msg: "some error4" });
     } else {
       const vol = await getVolunteersById(result[0].volunteers);
       if (vol == 0) {
-        res.json({ msg: "some error" });
+        res.json({ msg: "some error5" });
       } else {
         var v = [];
         vol.forEach((e) => {
