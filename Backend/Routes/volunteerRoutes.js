@@ -18,7 +18,7 @@ router.post("/login", async (req, res) => {
     const { id, pwd } = req.body;
 
     const volunteer = await volunteerModel.findOne({ id, pwd });
-    console.log(volunteer);
+    // console.log(volunteer);
 
     if (volunteer) {
       return res.status(200).json({

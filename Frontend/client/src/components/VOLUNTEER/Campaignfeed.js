@@ -6,7 +6,7 @@ export default function Campaignfeed() {
     switch (status) {
       case "granted":
         return "text-success";
-      case "pending":
+      case "Pending":
         return "text-warning";
       case "rejected":
         return "text-danger";
@@ -26,7 +26,8 @@ export default function Campaignfeed() {
           `http://localhost:3003/volunteer/campaignFeed?id=${userID}`
         );
 
-        const data = response.data.data;
+        const data = response.data;
+        console.log(data);
 
         setCampaign(data);
       } catch (error) {
@@ -39,19 +40,24 @@ export default function Campaignfeed() {
 
   return (
     <div>
-    <VolNav/>
+      <VolNav />
       {campaign ? (
-        <>
-          <h1 className="text-light" style={{ marginBottom: "3%", marginTop: "3%" }}>
+        <div className="text-light">
+          <h1
+            className="text-light"
+            style={{ marginBottom: "3%", marginTop: "3%", textAlign: "center" }}
+          >
             Ongoing Campaigns :{" "}
           </h1>
-          <div className="row gy-3">
-            {campaign
-              .map((campaign, index) => (
+          <div
+            className="row gy-3"
+          >
+            {campaign.map((campaign, index) => (
+              <div>
                 <div
-                  className="col-12 bg-light text-dark"
+                  className="col-10 bg-light text-dark"
                   key={index}
-                  style={{ borderRadius: "8px" }}
+                  style={{ borderRadius: "8px", padding:'2%', marginLeft:'7%' }}
                 >
                   <div style={{ marginTop: "1%" }}>
                     <h2>
@@ -75,9 +81,10 @@ export default function Campaignfeed() {
                     </button>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
-        </>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
