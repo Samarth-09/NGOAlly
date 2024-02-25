@@ -50,4 +50,4 @@ NGOAlly is a dynamic platform designed to bridge the gap between Non-Governmenta
 - **Deependra Gharia**
 - **Manav Patel**
 - **Aagam Modi**
-- **Samarth Parekh**
+- **Samarth Parekh (Team Lead)**
