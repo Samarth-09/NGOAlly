@@ -17,6 +17,8 @@ export default function Viewmore() {
 
   const passData = async () => {
     try {
+      console.log(volunteerID);
+      console.log(campaignID);
       const response = await axios.get(
         `http://localhost:3003/volunteer/apply?volunteerId=${volunteerID}&campaignId=${campaignID}`);
 

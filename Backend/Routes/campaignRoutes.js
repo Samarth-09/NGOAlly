@@ -44,7 +44,7 @@ router.post("/create", async (req, res) => {
 
 router.get("/details", async (req, res) => {
   // console.log(1);
-  const result = await getCampaignsById(req.query.campaignId);
+  const result = await getCampaignsById(parseInt(req.query.campaignId));
   if (req.query.volunteerId != null) {
     if (result == 0) {
       res.json({ msg: "some error1" });
