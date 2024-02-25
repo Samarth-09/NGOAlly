@@ -2,6 +2,9 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import ngoimg from "../assets/ngo.jpg";
 export default function VolDashboard() {
+  
+  const userID = localStorage.getItem('userID');
+
   const getColor = (status) => {
     switch (status) {
       case "GRANTED":
@@ -22,7 +25,7 @@ export default function VolDashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3003/volunteer/dashboard?id=2`
+          `http://localhost:3003/volunteer/dashboard?id=${userID}`
         );
 
         const data1 = response.data.data1;

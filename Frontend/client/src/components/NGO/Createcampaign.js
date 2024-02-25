@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import NgoNav from "./NgoNav";
 
 export default function Createcampaign() {
   const [name, setName] = useState("");
@@ -48,6 +49,7 @@ export default function Createcampaign() {
   };
   return (
     <div>
+    <NgoNav/>
       <h1 className="text-light text-center my-2">Invite Volunteers</h1>
       <form onSubmit={handleSubmit}>
         <div
