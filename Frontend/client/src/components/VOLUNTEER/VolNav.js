@@ -23,7 +23,7 @@ export default function VolNav() {
               <Nav.Link className="main-nav mx-1 my-2" href="/feed">
                 Campaign Feed
               </Nav.Link>
-              <Nav.Link className="main-nav mx-1 my-2" href="/vol-dashboard">
+              <Nav.Link className="main-nav mx-1 my-2" href="/volunteer-dashboard">
                 Dashboard
               </Nav.Link>
             </Nav>

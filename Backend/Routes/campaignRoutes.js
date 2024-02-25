@@ -6,6 +6,7 @@ import {
 import {
   getVolunteerById,
   getVolunteersById,
+  updateRequestStatus,
 } from "../DbHandler/volunteerHandler.js";
 import matchCampaignWithVolunteers from "./sendEmailtoVolunteer.js";
 import { updateRequestStatus } from "../DbHandler/volunteerHandler.js";
@@ -99,7 +100,6 @@ router.get("/details", async (req, res) => {
   }
 });
 
-
 router.post("/grant", async (req, res) => {
   const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId, "granted");
   if (result == 0) {
@@ -109,9 +109,6 @@ router.post("/grant", async (req, res) => {
   }
 });
 
-
-
-
 router.post("/reject", async (req, res) => {
   const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId, "rejected");
 if (result == 0) {
@@ -120,7 +117,6 @@ if (result == 0) {
   res.json({ msg: "done" });
 }
 });
-
 function convertToDate(dateString) {
   const [day, month, year] = dateString.split("/");
   const date = new Date(year, month - 1, day);
