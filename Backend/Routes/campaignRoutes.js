@@ -26,17 +26,17 @@ router.post("/create", async (req, res) => {
     console.log(req.body.id);
 
     matchCampaignWithVolunteers(req.body);
-    var dates1 = req.body.campaignDate.split("-");
+    // var dates1 = req.body.campaignDate.split("-");
 
-    var stDate = convertToDate(dates1[0]),
-      enDate = convertToDate(dates1[1]);
-    scheduleCampaignEndTask(enDate, req.body.id);
+    // var stDate = convertToDate(dates1[0]),
+    //   enDate = convertToDate(dates1[1]);
+    // scheduleCampaignEndTask(enDate, req.body.id);
 
-    var applicationdate = req.body.applicationDate.split("-");
-    var stapplicationDate = convertToDate(applicationdate[0]),
-      endapplicationDate = convertToDate(applicationdate[1]);
+    // var applicationdate = req.body.applicationDate.split("-");
+    // var stapplicationDate = convertToDate(applicationdate[0]),
+    //   endapplicationDate = convertToDate(applicationdate[1]);
 
-    scheduleApplicationEnddate(endapplicationDate);
+    // scheduleApplicationEnddate(endapplicationDate);
 
     res.json({ msg: "done" });
   }

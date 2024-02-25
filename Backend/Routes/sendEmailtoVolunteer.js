@@ -22,9 +22,9 @@ const transporter = nodemailer.createTransport({
         try {
           await transporter.sendMail({
             from: "djgharia@gmail.com", 
-            to: `${volunteer.email}`, 
+            to: "patelmanav278@gmail.com", 
             subject: "New Campaign Matching Your Interests",
-            text: `Dear ${volunteer.name},\n\nA new campaign matching your interests has been created: ${campaign.name}. Would you like to join?`,
+            text: `Dear Manav,\n\nA new campaign matching your interests has been created: ${campaign.name}. Would you like to join?`,
           });
           console.log(`Email sent to ${volunteer.name}`);
         } catch (error) {
