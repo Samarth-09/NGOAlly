@@ -40,7 +40,7 @@ const addCampaign = async (id, campaignId) => {
   }
 };
 
-const updateRequestStatus = async (id, campaignId, status) => {
+const updateRequestStatus = async (id, campaignId,status) => {
   let x = await getVolunteerById(id);
   let idx;
   if (x == 0) {

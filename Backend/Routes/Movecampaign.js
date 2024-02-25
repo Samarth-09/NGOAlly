@@ -1,9 +1,11 @@
 import cron from 'node-cron';
-import volunteerModel from '../Model/Volunteer.js'; 
-import ngoModel from '../Model/ngo.js'; 
+import volunteerModel from '../Model/Volunteer.js';
+import ngoModel from '../Model/ngo.js';
+let canApply = true;
+let campaignEnded = false;
 
 const moveCampaignToPrevious = async (campaignId) => {
-    console.log("hello");
+  console.log("hello");
   try {
     // Update volunteers
     await volunteerModel.updateMany(
@@ -23,12 +25,9 @@ const moveCampaignToPrevious = async (campaignId) => {
   }
 };
 
-// Function to schedule the task when campaign date is ended
 const scheduleCampaignEndTask = (campaignEndDate, campaignId) => {
-  // Define the cron expression for the end date
   const cronExpression = getCronExpression(campaignEndDate);
 
-  // Schedule task using cron expression
   cron.schedule(cronExpression, () => {
     moveCampaignToPrevious(campaignId);
   });
@@ -36,16 +35,39 @@ const scheduleCampaignEndTask = (campaignEndDate, campaignId) => {
 
 // Function to get the cron expression for a given date
 const getCronExpression = (date) => {
-    const d = new Date(date);
+  const d = new Date(date);
 
-    // Set the time to 8:45 PM
-    d.setHours(23); 
-    d.setMinutes(26); 
 
-    // Construct cron expression
-    const cronExpression = `0 ${d.getMinutes()} ${d.getHours()} ${d.getDate()} ${d.getMonth() + 1} *`;
-   console.log(cronExpression);
-    return cronExpression;
+  d.setHours(23);
+  d.setMinutes(26);
+
+
+  const cronExpression = `0 ${d.getMinutes()} ${d.getHours()} ${d.getDate()} ${d.getMonth() + 1} *`;
+  console.log(cronExpression);
+  return cronExpression;
 };
 
-export default scheduleCampaignEndTask;
+const scheduleApplicationEnddate = (applicationEndDate) => {
+  const cronExpression = getCronExpression(applicationEndDate);
+
+  cron.schedule(cronExpression, () => {
+    disableApplybtn();
+  });
+};
+
+const disableApplybtn = async () => {
+
+  try {
+
+canApply=false;
+    console.log("btn disabled");
+  } catch (error) {
+    console.error('Error ', error);
+  }
+};
+
+
+
+
+export {scheduleApplicationEnddate,scheduleCampaignEndTask};
+export { canApply, campaignEnded };

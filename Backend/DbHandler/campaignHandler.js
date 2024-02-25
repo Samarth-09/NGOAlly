@@ -24,6 +24,25 @@ const getCampaignsById = async (ids) => {
     return 0;
   }
 };
+
+const getCampaignsByFilters = async (filters) => {
+  try {
+    const result = await campaignModel.find({
+      ProjectNeeds: { $in: filters },
+    });
+    if (result.length == 0) {
+      return 0;
+    }
+    return result;
+  } catch (e) {
+    console.log(e);
+    return 0;
+  }
+};
+
+
+
+
 const addVolunteer = async (id, volunteerId) => {
   try {
     await campaignModel.updateOne(
@@ -35,4 +54,4 @@ const addVolunteer = async (id, volunteerId) => {
     return 0;
   }
 };
-export { saveCampaign, getCampaignsById, addVolunteer };
+export { saveCampaign, getCampaignsById, addVolunteer,getCampaignsByFilters };

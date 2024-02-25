@@ -7,6 +7,7 @@ import VolNav from "./components/VOLUNTEER/VolNav";
 import VolDashboard from "./components/VOLUNTEER/VolDashboard";
 import Createcampaign from "./components/NGO/Createcampaign";
 import Home from "./components/Home";
+import Campaignfeed from "./components/VOLUNTEER/Campaignfeed";
 
 function App() {
 
@@ -46,6 +47,9 @@ function App() {
           />
           <Route path="/" element={
             <Home></Home>
+          } />
+          <Route path="/feed" element={
+            <Campaignfeed></Campaignfeed>
           } />
         </Routes>
       </BrowserRouter>
