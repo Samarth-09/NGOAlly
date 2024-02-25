@@ -89,6 +89,7 @@ router.get("/details", async (req, res) => {
         vol.forEach((e) => {
           var x = {
             name: e.name,
+            id: e.id,
             status:
               e.requestStatus[e.currentCampaigns.indexOf(req.query.campaignId)],
           };

@@ -10,7 +10,7 @@ import {
   getCampaignsById,
   getCampaignsByFilters,
 } from "../DbHandler/campaignHandler.js";
-import { canApply, campaignEnded } from "./Movecampaign.js";
+import { canApply, campaignEnded, changeApply, changeCampaignEnded } from "./Movecampaign.js";
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
@@ -161,7 +161,7 @@ router.get("/campaignFeed", async (req, res) => {
 
 router.get("/apply", async (req, res) => {
   if (canApply && !campaignEnded) {
-    canApply=false;
+    changeApply(false);
     let r = await addCampaign(
       parseInt(req.query.volunteerId),
       parseInt(req.query.campaignId)

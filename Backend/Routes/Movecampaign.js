@@ -3,7 +3,12 @@ import volunteerModel from '../Model/Volunteer.js';
 import ngoModel from '../Model/ngo.js';
 let canApply = true;
 let campaignEnded = false;
-
+function changeApply(val){
+  canApply = val;
+}
+function changeCampaignEnded(val){
+  campaignEnded = val;
+}
 const moveCampaignToPrevious = async (campaignId) => {
   console.log("hello");
   try {
@@ -70,4 +75,4 @@ canApply=false;
 
 
 export {scheduleApplicationEnddate,scheduleCampaignEndTask};
-export { canApply, campaignEnded };
+export { changeApply, changeCampaignEnded, canApply, campaignEnded };
