@@ -60,15 +60,15 @@ export default function Viewmore() {
       
       <h1 className="text-center my-3">Campaign Details.</h1>
 
-      <div className="container" style={{marginLeft:"25%"}}>
+      <div className="container" style={{marginLeft:"30%"}}>
         <div className="row text-center">
-          <div className="col-6 text-dark bg-light" style={{borderRadius:"10px",padding:"2%"}}>
-            <p>Campaign Name : {name}</p>
-            <p>Campaign Location : {location}</p>
-            <p>Campaign Needs : {needs}</p>
-            <p>Campain Host : {host}</p>
-            <p>Application Date : {appdate}</p>
-            <p>Campaign Date : {campdate}</p>
+          <div className="col-5 text-dark bg-ngo-container font-family-label" style={{borderRadius:"10px",padding:"2%0",fontSize:"24px"}}>
+            <p><b>Campaign Name : </b>{name}</p>
+            <p><b>Campaign Location : </b>{location}</p>
+            <p><b>Campaign Needs : </b>{needs}</p>
+            <p><b>Campain Host : </b>{host}</p>
+            <p><b>Application Date : </b>{appdate}</p>
+            <p><b>Campaign Date : </b>{campdate}</p>
 
             <button className="btn btn-primary">Apply</button>
           </div>
