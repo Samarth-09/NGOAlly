@@ -82,28 +82,64 @@ const Viewdetails = () => {
               <b>Campaign Date : </b>
               {campdate}
             </p>
-            <u>
-              <p style={{ marginBottom: "1%" }}>Volunteers list : </p>
-            </u>
-            {
-              (volunteers) ? (<div className="row">
-              <div className="col-12">
-                {volunteers.map((obj, key) => (
-                  <div id={key}>
-                    <p style={{ marginBottom: "-1%" }}>
-                      <b>{key + 1} Volunteer Name : </b>
-                      {obj.name}
-                    </p>
-                    <p>
-                      <b>Volunteer Status : </b>
-                      {obj.status}
-                    </p>
-                  </div>
-                ))}
+            <p style={{ marginBottom: "1%" }}>Volunteers list : </p>
+            {volunteers ? (
+              <div className="row">
+                <h2>Granted List</h2>
+                <div className="col-12">
+                  {volunteers
+                    .filter((volunteer) => volunteer.status === "granted")
+                    .map((obj, key) => (
+                      <div id={key}>
+                        <p style={{ marginBottom: "-1%" }}>
+                          {obj.name}{" "}
+                          <span className="text-danger">Granted</span>
+                        </p>
+                      </div>
+                    ))}
+                </div>
               </div>
-            </div>) : (<p>Loading...</p>)
-            }
-            
+            ) : (
+              <p>Loading...</p>
+            )}
+            {volunteers ? (
+              <div className="row">
+                <h2>Rejected List</h2>
+                <div className="col-12">
+                  {volunteers
+                    .filter((volunteer) => volunteer.status === "rejected")
+                    .map((obj, key) => (
+                      <div id={key}>
+                        <p style={{ marginBottom: "-1%" }}>
+                          {obj.name}{" "}
+                          <span className="text-danger">Rejected</span>
+                        </p>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
+            {volunteers ? (
+              <div className="row">
+                <h2>Rejected List</h2>
+                <div className="col-12">
+                  {volunteers
+                    .filter((volunteer) => volunteer.status === "pending")
+                    .map((obj, key) => (
+                      <div id={key}>
+                        <p style={{ marginBottom: "-1%" }}>
+                          {obj.name} <button>Accept</button>
+                          <button>Reject</button>
+                        </p>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
         </div>
       </div>
