@@ -9,7 +9,6 @@ import {
   updateRequestStatus,
 } from "../DbHandler/volunteerHandler.js";
 import matchCampaignWithVolunteers from "./sendEmailtoVolunteer.js";
-import { updateRequestStatus } from "../DbHandler/volunteerHandler.js";
 import {
   scheduleCampaignEndTask,
   scheduleApplicationEnddate,

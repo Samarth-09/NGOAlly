@@ -17,7 +17,7 @@ export default function Viewmore() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3003/ngo/dashboard?volunteerId=${volunteerID}&campaignId=${campaignID}}`
+          `http://localhost:3003/campaign/details?volunteerId=${volunteerID}&campaignId=${campaignID}}`
         );
 
         data1 = response.data.name;
