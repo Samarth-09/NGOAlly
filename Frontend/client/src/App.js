@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { createContext, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NgoDashboard from "./components/NGO/NgoDashboard";
 import NgoNav from "./components/NGO/NgoNav";
@@ -8,12 +8,12 @@ import VolDashboard from "./components/VOLUNTEER/VolDashboard";
 import Createcampaign from "./components/NGO/Createcampaign";
 import Home from "./components/Home";
 
-export let ID = "";
-
 function App() {
 
+  const [ID, setID] = useState('');
   const getId = (data) => {
-    ID = data;
+    
+    setID(data);
     console.log(ID);
   }
 
@@ -25,10 +25,10 @@ function App() {
             exact
             path="/ngo-dashboard"
             element={
-              <div>
+              <>
                 <NgoNav />
                 <NgoDashboard />
-              </div>
+              </>
             }
           />
           <Route
@@ -45,7 +45,7 @@ function App() {
             }
           />
           <Route path="/" element={
-            <Home onSubmit={getId}></Home>
+            <Home></Home>
           } />
         </Routes>
       </BrowserRouter>
