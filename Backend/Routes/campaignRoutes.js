@@ -9,7 +9,6 @@ import {
   updateRequestStatus,
 } from "../DbHandler/volunteerHandler.js";
 import matchCampaignWithVolunteers from "./sendEmailtoVolunteer.js";
-import { updateRequestStatus } from "../DbHandler/volunteerHandler.js";
 import scheduleCampaignEndTask from "./Movecampaign.js";
 let canApply = true;
 let campaignEnded = false;
@@ -94,7 +93,16 @@ router.get("/details", async (req, res) => {
 });
 
 router.post("/grant", async (req, res) => {
-  const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId);
+  const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId, "granted");
+  if (result == 0) {
+    res.json({ msg: "some error" });
+  } else {
+    res.json({ msg: "done" });
+  }
+});
+
+router.post("/reject", async (req, res) => {
+    const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId, "rejected");
   if (result == 0) {
     res.json({ msg: "some error" });
   } else {

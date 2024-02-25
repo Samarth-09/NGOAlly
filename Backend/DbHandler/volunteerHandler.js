@@ -40,7 +40,7 @@ const addCampaign = async (id, campaignId) => {
   }
 };
 
-const updateRequestStatus = async (id, campaignId) => {
+const updateRequestStatus = async (id, campaignId, status) => {
   let x = await getVolunteerById(id);
   let idx;
   if (x == 0) {
@@ -49,7 +49,7 @@ const updateRequestStatus = async (id, campaignId) => {
     idx = x.currentCampaigns.indexOf(campaignId);
     await volunteerModel.updateOne(
       { id: id },
-      { $set: { [`requestStatus.${idx}`]: "granted" } }
+      { $set: { [`requestStatus.${idx}`]: status } }
     );
     return 1;
   }

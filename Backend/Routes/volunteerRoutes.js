@@ -77,6 +77,7 @@ router.get("/dashboard", async (req, res) => {
           var idx = result.currentCampaigns.indexOf(e.id);
           var d = {
             name: e.name,
+            campaignId: e.id,
             description: e.description,
             status: "Ongoing",
             result: result.requestStatus[idx], //"GRANTED""PENDING" "REJECTED"
