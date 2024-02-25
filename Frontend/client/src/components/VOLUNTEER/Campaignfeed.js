@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import VolNav from "./VolNav";
+import Footer from "../Footer";
+
 export default function Campaignfeed() {
   const getColor = (status) => {
     switch (status) {
@@ -39,6 +41,7 @@ export default function Campaignfeed() {
   }, []);
 
   return (
+    <>
     <div>
       <VolNav />
       {campaign ? (
@@ -89,5 +92,7 @@ export default function Campaignfeed() {
         <p>Loading...</p>
       )}
     </div>
+    <Footer/>
+    </>
   );
 }

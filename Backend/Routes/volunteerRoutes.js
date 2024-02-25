@@ -166,6 +166,7 @@ router.get("/campaignFeed", async (req, res) => {
 
 router.get("/apply", async (req, res) => {
   if (canApply && !campaignEnded) {
+    canApply=false;
     let r = await addCampaign(req.query.volunteerId, req.query.campaignId);
     if (r == 0) {
       res.json({ msg: "some error" });
