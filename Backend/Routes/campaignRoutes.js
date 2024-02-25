@@ -10,7 +10,10 @@ import {
 } from "../DbHandler/volunteerHandler.js";
 import matchCampaignWithVolunteers from "./sendEmailtoVolunteer.js";
 import { updateRequestStatus } from "../DbHandler/volunteerHandler.js";
-import {scheduleCampaignEndTask,scheduleApplicationEnddate} from "./Movecampaign.js";
+import {
+  scheduleCampaignEndTask,
+  scheduleApplicationEnddate,
+} from "./Movecampaign.js";
 import { canApply, campaignEnded } from "./Movecampaign.js";
 
 const router = express.Router();
@@ -22,19 +25,18 @@ router.post("/create", async (req, res) => {
     console.log(req.body.campaignDate);
     console.log(req.body.id);
 
-     matchCampaignWithVolunteers(req.body);
+    matchCampaignWithVolunteers(req.body);
     var dates1 = req.body.campaignDate.split("-");
 
     var stDate = convertToDate(dates1[0]),
       enDate = convertToDate(dates1[1]);
-     scheduleCampaignEndTask(enDate, req.body.id);
+    scheduleCampaignEndTask(enDate, req.body.id);
 
-var applicationdate=req.body.applicationDate("-")
-var stapplicationDate = convertToDate(applicationdate[0]),
-endapplicationDate = convertToDate(applicationdate[1]);
+    var applicationdate = req.body.applicationDate("-");
+    var stapplicationDate = convertToDate(applicationdate[0]),
+      endapplicationDate = convertToDate(applicationdate[1]);
 
-scheduleApplicationEnddate(endapplicationDate);
-
+    scheduleApplicationEnddate(endapplicationDate);
 
     res.json({ msg: "done" });
   }
@@ -64,9 +66,11 @@ router.get("/details", async (req, res) => {
             canApply: canApply,
             campaignEnded: campaignEnded,
             status:
-              vol.requestStatus[
-                vol.currentCampaigns.indexOf(req.query.campaignId)
-              ],
+              vol.currentCampaigns.indexOf(req.query.campaignId) != -1
+                ? vol.requestStatus[
+                    vol.currentCampaigns.indexOf(req.query.campaignId)
+                  ]
+                : "not applied",
           });
         }
       }
@@ -101,7 +105,11 @@ router.get("/details", async (req, res) => {
 });
 
 router.post("/grant", async (req, res) => {
-  const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId, "granted");
+  const result = await updateRequestStatus(
+    req.query.volunteerId,
+    req.query.campaignId,
+    "granted"
+  );
   if (result == 0) {
     res.json({ msg: "some error" });
   } else {
@@ -110,12 +118,16 @@ router.post("/grant", async (req, res) => {
 });
 
 router.post("/reject", async (req, res) => {
-  const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId, "rejected");
-if (result == 0) {
-  res.json({ msg: "some error" });
-} else {
-  res.json({ msg: "done" });
-}
+  const result = await updateRequestStatus(
+    req.query.volunteerId,
+    req.query.campaignId,
+    "rejected"
+  );
+  if (result == 0) {
+    res.json({ msg: "some error" });
+  } else {
+    res.json({ msg: "done" });
+  }
 });
 function convertToDate(dateString) {
   const [day, month, year] = dateString.split("/");
