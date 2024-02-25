@@ -43,6 +43,7 @@ router.post("/create", async (req, res) => {
 });
 
 router.get("/details", async (req, res) => {
+  // console.log(1);
   const result = await getCampaignsById(req.query.campaignId);
   if (req.query.volunteerId != null) {
     if (result == 0) {
@@ -76,6 +77,7 @@ router.get("/details", async (req, res) => {
       }
     }
   } else {
+    // console.log(2);
     if (result == 0) {
       res.json({ msg: "some error" });
     } else {
@@ -83,13 +85,16 @@ router.get("/details", async (req, res) => {
       if (vol == 0) {
         res.json({ msg: "some error" });
       } else {
-        var v = vol.map((e) => {
-          return {
+        var v = [];
+        vol.forEach((e) => {
+          var x = {
             name: e.name,
             status:
               e.requestStatus[e.currentCampaigns.indexOf(req.query.campaignId)],
           };
+          v.push(x);
         });
+        // console.log(v);
         res.json({
           name: result[0].name,
           location: result[0].location,
