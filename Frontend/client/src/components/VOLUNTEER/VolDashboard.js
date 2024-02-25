@@ -1,9 +1,9 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ngoimg from "../assets/ngo.jpg";
+import { Link } from "react-router-dom";
 export default function VolDashboard() {
-  
-  const userID = localStorage.getItem('userID');
+  const userID = localStorage.getItem("userID");
 
   const getColor = (status) => {
     switch (status) {
@@ -40,6 +40,11 @@ export default function VolDashboard() {
 
     fetchData();
   }, []);
+
+  // const handleOngoing = () => {
+  //   console.log("jdjhd");
+
+  // };
 
   return (
     <div className="text-light container">
@@ -124,9 +129,20 @@ export default function VolDashboard() {
                 </p>
               </div>
               <div style={{ marginBottom: "1%" }}>
-                <button type="button" className="btn btn-primary">
-                  View Details
-                </button>
+                <Link to="/campaign-details">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => {
+                      console.log(campaign.campaignId);
+                      localStorage.setItem("viewmoreKey", campaign.campaignId);
+                      const x = localStorage.getItem("viewmoreKey");
+                      console.log(x);
+                    }}
+                  >
+                    View Details
+                  </button>
+                </Link>
               </div>
             </div>
           ))}

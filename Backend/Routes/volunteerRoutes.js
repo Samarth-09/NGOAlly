@@ -18,7 +18,7 @@ router.post("/login", async (req, res) => {
     const { id, pwd } = req.body;
 
     const volunteer = await volunteerModel.findOne({ id, pwd });
-    console.log(volunteer);
+    // console.log(volunteer);
 
     if (volunteer) {
       return res.status(200).json({
@@ -93,6 +93,7 @@ router.get("/dashboard", async (req, res) => {
             var idx = result.previousCampaigns.indexOf(e.id);
             var d = {
               name: e.name,
+              campaignId: e.id,
               description: e.description,
               status: "Completed",
               result: result.requestStatus[idx], //"GRANTED""PENDING" "REJECTED"
