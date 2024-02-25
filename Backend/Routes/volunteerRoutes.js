@@ -119,4 +119,23 @@ router.get("/dashboard", async (req, res) => {
     console.log(e);
   }
 });
+
+
+    
+router.get("/apply", async (req, res) => {
+  if (canApply && !campaignEnded) {
+    let r = await addCampaign(req.query.volunteerId, req.query.campaignId);
+    if (r == 0) {
+      res.json({ msg: "some error" });
+    } else {
+      r = await addVolunteer(req.query.campaignId, req.query.volunteerId);
+      if (r == 0) {
+        res.json({ msg: "some error" });
+      } else {
+        res.json({ msg: "done" });
+      }
+    }
+  }
+});
+
 export default router;

@@ -8,7 +8,9 @@ import {
   getVolunteersById,
   updateRequestStatus,
 } from "../DbHandler/volunteerHandler.js";
-
+import matchCampaignWithVolunteers from "./sendEmailtoVolunteer.js";
+import { updateRequestStatus } from "../DbHandler/volunteerHandler.js";
+import scheduleCampaignEndTask from "./Movecampaign.js";
 let canApply = true;
 let campaignEnded = false;
 
@@ -21,11 +23,12 @@ router.post("/create", async (req, res) => {
     console.log(req.body.campaignDate);
     console.log(req.body.id);
 
+     matchCampaignWithVolunteers(req.body);
     var dates1 = req.body.campaignDate.split("-");
 
     var stDate = convertToDate(dates1[0]),
       enDate = convertToDate(dates1[1]);
-    scheduleCampaignEndTask(enDate, req.body.id);
+     scheduleCampaignEndTask(enDate, req.body.id);
     res.json({ msg: "done" });
   }
 });
