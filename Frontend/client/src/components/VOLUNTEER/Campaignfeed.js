@@ -4,12 +4,14 @@ import VolNav from "./VolNav";
 export default function Campaignfeed() {
   const getColor = (status) => {
     switch (status) {
-      case "GRANTED":
+      case "granted":
         return "text-success";
-      case "PENDING":
+      case "pending":
         return "text-warning";
-      case "REJECTED":
+      case "rejected":
         return "text-danger";
+      case "not applied":
+        return "text-secondary";
       default:
         return "text-secondary";
     }
@@ -21,12 +23,12 @@ export default function Campaignfeed() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3003/volunteer/dashboard?id=${userID}`
+          `http://localhost:3003/volunteer/campaignFeed?id=${userID}`
         );
 
-        const data2 = response.data.data2;
+        const data = response.data.data;
 
-        setCampaign(data2);
+        setCampaign(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -37,14 +39,14 @@ export default function Campaignfeed() {
 
   return (
     <div>
+    <VolNav/>
       {campaign ? (
         <>
-          <h1 style={{ marginBottom: "3%", marginTop: "3%" }}>
+          <h1 className="text-light" style={{ marginBottom: "3%", marginTop: "3%" }}>
             Ongoing Campaigns :{" "}
           </h1>
           <div className="row gy-3">
             {campaign
-              .filter((campaign) => campaign.status === "Ongoing")
               .map((campaign, index) => (
                 <div
                   className="col-12 bg-light text-dark"
@@ -63,8 +65,8 @@ export default function Campaignfeed() {
                     </p>
                   </div>
                   <div>
-                    <p className={getColor(campaign.result)}>
-                      Result: {campaign.result}
+                    <p className={getColor(campaign.status)}>
+                      Status: {campaign.status}
                     </p>
                   </div>
                   <div style={{ marginBottom: "1%" }}>
