@@ -16,6 +16,11 @@ export default function Createcampaign() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      let locationFilter = location.concat(",", needs);
+      const spli = locationFilter.split(",");
+      //console.log(spli);
+
+      
       let applicationendbeginDate = beginApplicationDate.concat(
         "-",
         endApplicationDate
@@ -27,7 +32,7 @@ export default function Createcampaign() {
           location: location,
           id: parseInt(campaignId),
           host: parseInt(host),
-          ProjectNeeds: needs,
+          ProjectNeeds: spli,
           applicationDate: applicationendbeginDate,
           description: description,
           campaignDate: campaignendbeginDate,

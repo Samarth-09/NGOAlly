@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function VolDashboard() {
   const userID = localStorage.getItem("userID");
-
+  // console.log(userID);
   const getColor = (status) => {
     switch (status) {
       case "GRANTED":
@@ -102,8 +102,10 @@ export default function VolDashboard() {
         <p>Loading...</p>
       )}
       {/* -------------------------------------------------------------------------------- */}
-
-      <h1 style={{ marginBottom: "3%", marginTop: "3%" }}>
+      
+      { (campaign) ? (
+        <>
+        <h1 style={{ marginBottom: "3%", marginTop: "3%" }}>
         Ongoing Campaigns :{" "}
       </h1>
       <div className="row gy-3">
@@ -147,6 +149,10 @@ export default function VolDashboard() {
             </div>
           ))}
       </div>
+      </>) : (
+        <p>Loading...</p>
+      )}
+      
 
       {/* --------------------------------------------------------------------- */}
       {campaign ? (
@@ -180,10 +186,18 @@ export default function VolDashboard() {
                     </p>
                   </div>
                   <div style={{ marginBottom: "1%" }}>
-                    <button type="button" className="btn btn-primary">
-                      View Details
-                    </button>
-                  </div>
+                <Link to="/campaign-details">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => {
+                      localStorage.setItem("viewmoreKey", campaign.campaignId);
+                    }}
+                  >
+                    View Details
+                  </button>
+                </Link>
+              </div>
                 </div>
               ))}
           </div>

@@ -19,7 +19,7 @@ export default function Viewmore() {
     try {
       const response = await axios.get(
         `http://localhost:3003/volunteer/apply?volunteerId=${volunteerID}&campaignId=${campaignID}`);
-        
+
       if(response.data.msg==="done")
         {
           setStatus("pending");
@@ -70,7 +70,7 @@ export default function Viewmore() {
         setCampdate(data6);
         setApply(data7.toString());
         setStatus(data8);
-        console.log(apply);
+        // console.log(apply);
         // console.log
       } catch (error) {
         console.error("Error fetching data:", error);

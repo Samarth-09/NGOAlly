@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import VolNav from "./VolNav";
 import Footer from "../Footer";
+import {Link} from "react-router-dom";
 
 export default function Campaignfeed() {
   const getColor = (status) => {
@@ -79,10 +80,18 @@ export default function Campaignfeed() {
                     </p>
                   </div>
                   <div style={{ marginBottom: "1%" }}>
-                    <button type="button" className="btn btn-primary">
-                      View Details
-                    </button>
-                  </div>
+                <Link to="/campaign-details">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => {
+                      localStorage.setItem("viewmoreKey", campaign.campaignId);
+                    }}
+                  >
+                    View Details
+                  </button>
+                </Link>
+              </div>
                 </div>
               </div>
             ))}

@@ -32,7 +32,7 @@ router.post("/create", async (req, res) => {
       enDate = convertToDate(dates1[1]);
     scheduleCampaignEndTask(enDate, req.body.id);
 
-    var applicationdate = req.body.applicationDate("-");
+    var applicationdate = req.body.applicationDate.split("-");
     var stapplicationDate = convertToDate(applicationdate[0]),
       endapplicationDate = convertToDate(applicationdate[1]);
 
