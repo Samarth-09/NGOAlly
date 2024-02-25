@@ -8,6 +8,8 @@ import {
   getVolunteersById,
 } from "../DbHandler/volunteerHandler.js";
 
+import scheduleCampaignEndTask from './Movecampaign.js';
+
 let canApply = true;
 let campaignEnded = false;
 

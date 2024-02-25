@@ -3,13 +3,15 @@ import axios from "axios";
 import ngoimg from "../assets/ngo.jpg";
 import { ID } from "../../App";
 
-const NgoDashboard = () => {
+const NgoDashboard = (props) => {
   const [ngo, setNgo] = useState(null);
   const [campaign, setCampaign] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // let ID = props.prop;
+        console.log(ID);
         const response = await axios.get(
           `http://localhost:3003/ngo/dashboard?id=${ID}`
         );
@@ -142,7 +144,7 @@ const NgoDashboard = () => {
           </div>
         </>
       ) : (
-        <p>Loading</p>
+        <p>Loading...</p>
       )}
     </div>
   );
