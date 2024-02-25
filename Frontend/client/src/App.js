@@ -9,6 +9,7 @@ import Createcampaign from "./components/NGO/Createcampaign";
 import Home from "./components/Home";
 import Campaignfeed from "./components/VOLUNTEER/Campaignfeed";
 import Viewmore from "./components/VOLUNTEER/Viewmore";
+import Viewdetails from "./components/NGO/Viewdetails";
 
 function App() {
 
@@ -54,6 +55,9 @@ function App() {
           } />
           <Route path="/campaign-details" element={
             <Viewmore></Viewmore>
+          } />
+          <Route path="/view-details" element={
+            <Viewdetails></Viewdetails>
           } />
         </Routes>
       </BrowserRouter>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import NgoNav from "./NgoNav.js"
-
+import Footer from "../Footer.js";
 export default function Createcampaign() {
   const [name, setName] = useState("");
   const [campaignId, setcampaignId] = useState("");
@@ -237,6 +237,7 @@ export default function Createcampaign() {
           </div>
         </div>
       </form>
+      <Footer/>
     </div>
   );
 }

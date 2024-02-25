@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ngoimg from "../assets/ngo.jpg";
+import Footer from "../Footer";
 import { Link } from "react-router-dom";
+
 export default function VolDashboard() {
   const userID = localStorage.getItem("userID");
 
@@ -47,6 +49,7 @@ export default function VolDashboard() {
   // };
 
   return (
+    <>
     <div className="text-light container">
       {volunteer ? (
         <>
@@ -135,7 +138,6 @@ export default function VolDashboard() {
                     className="btn btn-primary"
                     onClick={() => {
                       localStorage.setItem("viewmoreKey", campaign.campaignId);
-                      localStorage.getItem("viewmoreKey");
                     }}
                   >
                     View Details
@@ -190,6 +192,8 @@ export default function VolDashboard() {
         <p>Loading...</p>
       )}
     </div>
+    <Footer/>
+    </>
   );
 }
 
