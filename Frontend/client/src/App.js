@@ -27,7 +27,7 @@ function App() {
             element={
               <div>
                 <NgoNav />
-                <NgoDashboard />
+                <NgoDashboard/>
               </div>
             }
           />
