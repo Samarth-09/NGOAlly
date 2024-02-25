@@ -93,7 +93,7 @@ const Viewdetails = () => {
                       {obj.name}
                     </p>
                     <p>
-                      <b>Volunteer List : </b>
+                      <b>Volunteer Status : </b>
                       {obj.status}
                     </p>
                   </div>
