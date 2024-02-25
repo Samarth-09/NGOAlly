@@ -11,7 +11,6 @@ const NgoDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-
         const response = await axios.get(
           `http://localhost:3003/ngo/dashboard?id=${userID}`
         );
@@ -144,7 +143,7 @@ const NgoDashboard = () => {
           </div>
         </>
       ) : (
-        <p>Loading</p>
+        <p>Loading...</p>
       )}
     </div>
   );

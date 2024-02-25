@@ -1,7 +1,15 @@
 import express from "express";
 import volunteerModel from "../Model/Volunteer.js";
-import { getVolunteerById } from "../DbHandler/volunteerHandler.js";
-import { getCampaignsById } from "../DbHandler/campaignHandler.js";
+import {
+  getVolunteerById,
+  addCampaign,
+  updateRequestStatus,
+} from "../DbHandler/volunteerHandler.js";
+import {
+  addVolunteer,
+  getCampaignsById,
+} from "../DbHandler/campaignHandler.js";
+import { canApply, campaignEnded } from "./campaignRoutes.js";
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
@@ -109,6 +117,24 @@ router.get("/dashboard", async (req, res) => {
   } catch (e) {
     res.json({ msg: "Some Error" });
     console.log(e);
+  }
+});
+
+
+    
+router.get("/apply", async (req, res) => {
+  if (canApply && !campaignEnded) {
+    let r = await addCampaign(req.query.volunteerId, req.query.campaignId);
+    if (r == 0) {
+      res.json({ msg: "some error" });
+    } else {
+      r = await addVolunteer(req.query.campaignId, req.query.volunteerId);
+      if (r == 0) {
+        res.json({ msg: "some error" });
+      } else {
+        res.json({ msg: "done" });
+      }
+    }
   }
 });
 

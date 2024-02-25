@@ -27,4 +27,36 @@ const getVolunteersById = async (ids) => {
     return 0;
   }
 };
-export { getVolunteerById, getVolunteersById };
+
+const addCampaign = async (id, campaignId) => {
+  try {
+    await volunteerModel.updateOne(
+      { id: id },
+      { $push: { currentCampaigns: campaignId, requestStatus: "pending" } }
+    );
+    return 1;
+  } catch (e) {
+    return 0;
+  }
+};
+
+const updateRequestStatus = async (id, campaignId) => {
+  let x = await getVolunteerById(id);
+  let idx;
+  if (x == 0) {
+    return 0;
+  } else {
+    idx = x.currentCampaigns.indexOf(campaignId);
+    await volunteerModel.updateOne(
+      { id: id },
+      { $set: { [`requestStatus.${idx}`]: "granted" } }
+    );
+    return 1;
+  }
+};
+export {
+  getVolunteerById,
+  getVolunteersById,
+  addCampaign,
+  updateRequestStatus,
+};

@@ -24,5 +24,15 @@ const getCampaignsById = async (ids) => {
     return 0;
   }
 };
-
-export { saveCampaign, getCampaignsById };
+const addVolunteer = async (id, volunteerId) => {
+  try {
+    await campaignModel.updateOne(
+      { id: id },
+      { $push: { volunteers: volunteerId } }
+    );
+    return 1;
+  } catch (e) {
+    return 0;
+  }
+};
+export { saveCampaign, getCampaignsById, addVolunteer };

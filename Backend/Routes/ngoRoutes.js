@@ -21,6 +21,7 @@ router.get("/dashboard", async (req, res) => {
             name: e.name,
             description: e.description,
             status: "Ongoing",
+            id: e.id
           };
           x.push(d);
         });
@@ -33,6 +34,7 @@ router.get("/dashboard", async (req, res) => {
               name: e.name,
               description: e.description,
               status: "Completed",
+              id: e.id
             };
             x.push(d);
           });
