@@ -4,7 +4,7 @@ const saveCampaign = async (d) => {
   try {
     const data = new campaignModel(d);
     await data.save();
-    const result = await addCampaign(d.host, d.id); // 0 or 1 output
+    const result = await addCampaign(d.host, d.id); 
     return result;
   } catch (e) {
     console.log(e);
