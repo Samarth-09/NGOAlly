@@ -5,6 +5,7 @@ import Footer from "../Footer";
 
 const Viewdetails = () => {
   const campaign_id = localStorage.getItem("ngo-campaign-id");
+
   console.log(campaign_id);
   const [campaign, setCampaign] = useState({});
   const [name, setName] = useState("");
@@ -14,6 +15,7 @@ const Viewdetails = () => {
   const [appdate, setAppdate] = useState("");
   const [campdate, setCampdate] = useState("");
   const [volunteers, setVolunteers] = useState([]);
+  const [component, setComponent] = useState(false);
 
   useEffect(() => {
     // console.log(1);
@@ -85,15 +87,14 @@ const Viewdetails = () => {
             <p style={{ marginBottom: "1%" }}>Volunteers list : </p>
             {volunteers ? (
               <div className="row">
-                <h2>Granted List</h2>
+                {/* <h2>Granted List</h2> */}
                 <div className="col-12">
                   {volunteers
                     .filter((volunteer) => volunteer.status === "granted")
                     .map((obj, key) => (
                       <div id={key}>
                         <p style={{ marginBottom: "-1%" }}>
-                          {obj.name}{" "}
-                          <span className="text-danger">Granted</span>
+                          {obj.name} : <span className="text-success">Granted</span>
                         </p>
                       </div>
                     ))}
@@ -104,15 +105,14 @@ const Viewdetails = () => {
             )}
             {volunteers ? (
               <div className="row">
-                <h2>Rejected List</h2>
+                {/* <h2>Rejected List</h2> */}
                 <div className="col-12">
                   {volunteers
                     .filter((volunteer) => volunteer.status === "rejected")
                     .map((obj, key) => (
                       <div id={key}>
                         <p style={{ marginBottom: "-1%" }}>
-                          {obj.name}{" "}
-                          <span className="text-danger">Rejected</span>
+                          {obj.name} : <span className="text-danger">Rejected</span>
                         </p>
                       </div>
                     ))}
@@ -123,15 +123,57 @@ const Viewdetails = () => {
             )}
             {volunteers ? (
               <div className="row">
-                <h2>Rejected List</h2>
+                {/* <h2>Rejected List</h2> */}
                 <div className="col-12">
                   {volunteers
                     .filter((volunteer) => volunteer.status === "pending")
                     .map((obj, key) => (
                       <div id={key}>
                         <p style={{ marginBottom: "-1%" }}>
-                          {obj.name} <button>Accept</button>
-                          <button>Reject</button>
+                          {obj.name}{" "}
+                          <button className="bg-danger text-light"
+                            onClick={async() => {
+    
+                                  try {
+                                    const response = await axios.post(
+                                      `http://localhost:3003/campaign/reject?volunteerId=${volunteers.id}&campaignId=${campaign_id}`
+                                    );
+                                    const msg = response.data.msg;
+                                    console.log(msg);
+                                    if (msg == "done") {
+                                      setComponent(false);
+                                    }
+                                  } catch (error) {
+                                    console.error(
+                                      "Error fetching data:",
+                                      error
+                                    );
+                                  }}}
+                          >
+                            Reject
+                          </button>
+                          <button className="bg-success text-light"
+                            onClick={async() => {
+    
+                                  try {
+                                    const response = await axios.post(
+                                      `http://localhost:3003/campaign/grant?volunteerId=${volunteers.id}&campaignId=${campaign_id}`
+                                    );
+                                    const msg = response.data.msg;
+                                    console.log(msg);
+                                    if (msg == "done") {
+                                      setComponent(false);
+                                    }
+                                  } catch (error) {
+                                    console.error(
+                                      "Error fetching data:",
+                                      error
+                                    );
+                                  }}}
+                          >
+                            Accept
+                          </button>
+                          {/* <button onClick={() => {}}>Accept</button> */}
                         </p>
                       </div>
                     ))}
