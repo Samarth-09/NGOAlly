@@ -161,6 +161,7 @@ router.get("/campaignFeed", async (req, res) => {
 
 router.get("/apply", async (req, res) => {
   if (canApply && !campaignEnded) {
+    canApply=false;
     let r = await addCampaign(
       parseInt(req.query.volunteerId),
       parseInt(req.query.campaignId)
@@ -168,7 +169,7 @@ router.get("/apply", async (req, res) => {
     if (r == 0) {
       res.json({ msg: "some error" });
     } else {
-      r = await addVolunteer(req.query.campaignId, req.query.volunteerId);
+      r = await addVolunteer(parseInt(req.query.campaignId), parseInt(req.query.volunteerId));
       if (r == 0) {
         res.json({ msg: "some error" });
       } else {

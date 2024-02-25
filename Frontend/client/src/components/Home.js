@@ -3,6 +3,7 @@ import Signupngo from "./NGO/Signupngo";
 import Loginngo from "./NGO/Loginngo";
 import Signupvol from "./VOLUNTEER/Signupvol";
 import Loginvol from "./VOLUNTEER/Loginvol";
+import Footer from "./Footer";
 export default function Home(props) {
   const [signUp, setSignUp] = useState("NGO");
   const [logIn, setLogIn] = useState("NGO");
@@ -185,6 +186,7 @@ export default function Home(props) {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

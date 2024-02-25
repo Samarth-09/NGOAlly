@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ngoimg from "../assets/ngo.jpg";
-
+import {Link} from "react-router-dom";
+import Footer from "../Footer";
 const NgoDashboard = () => {
+
+  const handleViewDetails = () => {
+    console.log(campaign.id);
+    // localStorage.setItem("campaign-ngo-id",id);
+    // console.log(localStorage.getItem("campaign-ngo-id"));
+  }
 
   const userID = localStorage.getItem('userID');
   const [ngo, setNgo] = useState(null);
@@ -99,9 +106,14 @@ const NgoDashboard = () => {
                     <p>Status: {campaign.status}</p>
                   </div>
                   <div style={{ marginBottom: "1%" }}>
-                    <button type="button" className="btn btn-primary">
+                  <Link to="/view-details">
+                    <button type="button" className="btn btn-primary" onClick={()=>{
+                      localStorage.setItem("ngo-campaign-id", campaign.id);
+                      
+                    }}>
                       View Details
                     </button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -134,7 +146,7 @@ const NgoDashboard = () => {
                     <p>Status: {campaign.status}</p>
                   </div>
                   <div style={{ marginBottom: "1%" }}>
-                    <button type="button" className="btn btn-primary">
+                    <button type="button" className="btn btn-primary" onClick={handleViewDetails}>
                       View Details
                     </button>
                   </div>
@@ -145,6 +157,7 @@ const NgoDashboard = () => {
       ) : (
         <p>Loading...</p>
       )}
+      <Footer/>
     </div>
   );
 };
