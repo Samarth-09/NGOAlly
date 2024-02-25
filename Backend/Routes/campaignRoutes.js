@@ -9,9 +9,8 @@ import {
 } from "../DbHandler/volunteerHandler.js";
 import matchCampaignWithVolunteers from "./sendEmailtoVolunteer.js";
 import { updateRequestStatus } from "../DbHandler/volunteerHandler.js";
-import scheduleCampaignEndTask from "./Movecampaign.js";
-let canApply = true;
-let campaignEnded = false;
+import {scheduleCampaignEndTask,scheduleApplicationEnddate} from "./Movecampaign.js";
+import { canApply, campaignEnded } from "./Movecampaign.js";
 
 const router = express.Router();
 router.post("/create", async (req, res) => {
@@ -28,6 +27,14 @@ router.post("/create", async (req, res) => {
     var stDate = convertToDate(dates1[0]),
       enDate = convertToDate(dates1[1]);
      scheduleCampaignEndTask(enDate, req.body.id);
+
+var applicationdate=req.body.applicationDate("-")
+var stapplicationDate = convertToDate(applicationdate[0]),
+endapplicationDate = convertToDate(applicationdate[1]);
+
+scheduleApplicationEnddate(endapplicationDate);
+
+
     res.json({ msg: "done" });
   }
 });
@@ -94,7 +101,7 @@ router.get("/details", async (req, res) => {
 
 
 router.post("/grant", async (req, res) => {
-  const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId);
+  const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId, "granted");
   if (result == 0) {
     res.json({ msg: "some error" });
   } else {
@@ -102,6 +109,17 @@ router.post("/grant", async (req, res) => {
   }
 });
 
+
+
+
+router.post("/reject", async (req, res) => {
+  const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId, "rejected");
+if (result == 0) {
+  res.json({ msg: "some error" });
+} else {
+  res.json({ msg: "done" });
+}
+});
 
 function convertToDate(dateString) {
   const [day, month, year] = dateString.split("/");
