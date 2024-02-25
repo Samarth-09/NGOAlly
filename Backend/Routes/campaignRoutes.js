@@ -6,6 +6,7 @@ import {
 import {
   getVolunteerById,
   getVolunteersById,
+  updateRequestStatus,
 } from "../DbHandler/volunteerHandler.js";
 
 let canApply = true;
@@ -86,6 +87,15 @@ router.get("/details", async (req, res) => {
         });
       }
     }
+  }
+});
+
+router.post("/grant", async (req, res) => {
+  const result = await updateRequestStatus(req.query.volunteerId, req.query.campaignId);
+  if (result == 0) {
+    res.json({ msg: "some error" });
+  } else {
+    res.json({ msg: "done" });
   }
 });
 
