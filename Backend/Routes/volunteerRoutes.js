@@ -8,7 +8,7 @@ import {
 import {
   addVolunteer,
   getCampaignsById,
-  getCampaignsByFilters
+  getCampaignsByFilters,
 } from "../DbHandler/campaignHandler.js";
 import { canApply, campaignEnded } from "./Movecampaign.js";
 const router = express.Router();
@@ -64,7 +64,7 @@ router.post("/register", async (req, res) => {
 router.get("/dashboard", async (req, res) => {
   try {
     // console.log(1);
-    const result = await getVolunteerById(req.query.id);
+    const result = await getVolunteerById(parseInt(req.query.id));
     if (result == 0) {
       res.json({ msg: "Some Error" });
     } else {
@@ -124,30 +124,28 @@ router.get("/dashboard", async (req, res) => {
 });
 
 router.get("/campaignFeed", async (req, res) => {
-  const result = await getVolunteerById(req.query.id);
+  const result = await getVolunteerById(parseInt(req.query.id));
   if (result == 0) {
     res.json({ msg: "Some Error" });
   } else {
     const campaignList = await getCampaignsByFilters(result.filters);
     if (campaignList == 0) {
       res.json({ msg: "some error" });
-    }
-    else {
+    } else {
       var data = [];
       campaignList.forEach((e) => {
         var idx = result.currentCampaigns.indexOf(e.id);
         var status;
         if (idx != -1) {
           status = result.requestStatus[idx];
-        }
-        else {
+        } else {
           status = "not applied";
         }
         var x = {
           name: e.name,
           description: e.description,
-          status: status
-        }
+          status: status,
+        };
         data.push(x);
       });
       if (campaignList == 0) {
@@ -156,22 +154,22 @@ router.get("/campaignFeed", async (req, res) => {
         res.json(data);
       }
     }
-
   }
 });
 
-//name desc 
-
-
+//name desc
 
 router.get("/apply", async (req, res) => {
   if (canApply && !campaignEnded) {
     canApply=false;
-    let r = await addCampaign(req.query.volunteerId, req.query.campaignId);
+    let r = await addCampaign(
+      parseInt(req.query.volunteerId),
+      parseInt(req.query.campaignId)
+    );
     if (r == 0) {
       res.json({ msg: "some error" });
     } else {
-      r = await addVolunteer(req.query.campaignId, req.query.volunteerId);
+      r = await addVolunteer(parseInt(req.query.campaignId), parseInt(req.query.volunteerId));
       if (r == 0) {
         res.json({ msg: "some error" });
       } else {

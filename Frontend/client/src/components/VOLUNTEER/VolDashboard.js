@@ -138,7 +138,6 @@ export default function VolDashboard() {
                     className="btn btn-primary"
                     onClick={() => {
                       localStorage.setItem("viewmoreKey", campaign.campaignId);
-                      localStorage.getItem("viewmoreKey");
                     }}
                   >
                     View Details
