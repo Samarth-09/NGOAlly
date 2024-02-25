@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import VolNav from "./VolNav.js";
+import Footer from "../Footer.js";
 
 export default function Viewmore() {
   // const [ngo, setName] = useState(null);
@@ -74,6 +75,7 @@ export default function Viewmore() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
     </>
   );
